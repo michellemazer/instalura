@@ -8,21 +8,19 @@
 
 import React, {Fragment} from 'react';
 import {
-  Text, 
-  Image, 
   ScrollView,
-  Dimensions,
-  StyleSheet,
   FlatList,
 } from 'react-native';
 
-const largura = Dimensions.get("screen").width;
+import {Cabecalho} from "./src/Components/Cabecalho";
+import {Foto} from './src/Components/Foto';
+
 const informacoes = [
-  { usuario: "Michelle" }, 
-  { usuario: "Flavio" },
-  { usuario: "Ricardo" },
-  { usuario: "Gabriel" },
-  { usuario: "Leonardo" }
+  {id: 1, usuario: "Michelle" }, 
+  {id: 2, usuario: "Flavio" },
+  {id: 3, usuario: "Ricardo" },
+  {id: 4, usuario: "Gabriel" },
+  {id: 5, usuario: "Leonardo" }
 ];
 
 const App = () => {
@@ -30,23 +28,19 @@ const App = () => {
     <ScrollView>
       <FlatList 
         data={informacoes}
+        keyExtractor = {(item) =>item.id.toString()}
         renderItem={({item}) => 
+          
           <Fragment>
-            <Text>{item.usuario}</Text>
-            <Image source={require("./res/img/alura.jpg")} style={estilo.imagem}/>
+            <Cabecalho nomeUsuario={item.usuario}  />
+            <Foto/>
           </Fragment>
+        
         }
       />
       
     </ScrollView>
   );
 };
-
-const estilo=StyleSheet.create({
-  imagem:{
-    width:largura,
-    height:largura
-  }
-});
 
 export default App;
